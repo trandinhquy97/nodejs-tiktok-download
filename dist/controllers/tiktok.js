@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.tiktokDL = void 0;
 const axios_1 = __importDefault(require("axios"));
 const tiktokDL = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    console.log(req.query.url);
     let domain = "https://www.tikwm.com/";
     let result = yield axios_1.default.post(domain + "api/", {}, {
         headers: {
@@ -33,7 +32,6 @@ const tiktokDL = (req, res, next) => __awaiter(void 0, void 0, void 0, function*
             hd: 1,
         },
     });
-    console.log(result);
     res.send(200, {
         nowm: domain + result.data.data.play,
         wm: domain + result.data.data.wmplay,
