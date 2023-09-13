@@ -33,9 +33,9 @@ export async function instaReels(req, res, next) {
                 res.send({ thumbs, urls, title });
             })
             .catch(function (error) {
-                res.send({ error: error.message });
+                res.send({ error1: error.message });
             });
     } catch (error) {
-        res.send({ error: error.message });
+        res.send({ error2: error.message });
     }
 }
