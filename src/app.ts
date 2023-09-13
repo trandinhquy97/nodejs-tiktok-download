@@ -1,13 +1,22 @@
 import express from 'express';
-import { tiktokDL } from './controllers/tiktok';
+import { tiktok } from './controllers/tiktok';
+import { instaReels } from './controllers/insta_reels';
 const app = express();
 const port = 3000;
 
-app.get("/", async (req, res) => {
+/// V0
+app.get('/', async (req, res) => {
   res.send("Hello World!");
 });
+app.get('/get', tiktok);
 
-app.get("/get", tiktokDL);
+/// V1
+const v1Router = express.Router();
+
+v1Router.get('/tiktok', tiktok);
+v1Router.get('/instagram', instaReels);
+
+app.use('/v1', v1Router);
 
 app.listen(port, () => {
   return console.log(`Express is listening at http://localhost:${port}`);
