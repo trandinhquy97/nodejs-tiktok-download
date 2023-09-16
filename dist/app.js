@@ -12,10 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv/config");
 const express_1 = __importDefault(require("express"));
 const tiktok_1 = require("./controllers/tiktok");
 const insta_reels_1 = require("./controllers/insta_reels");
-require("dotenv/config");
+const facebook_1 = require("./controllers/facebook");
 const app = (0, express_1.default)();
 const port = 3000;
 /// V0
@@ -27,6 +28,7 @@ app.get('/get', tiktok_1.tiktok);
 const v1Router = express_1.default.Router();
 v1Router.get('/tiktok', tiktok_1.tiktok);
 v1Router.get('/instagram', insta_reels_1.instaReels);
+v1Router.get('/facebook', facebook_1.facebook);
 v1Router.get('/cookie', (req, res, next) => __awaiter(void 0, void 0, void 0, function* () { res.send(process.env.INSTAGRAM_COOKIE); }));
 app.use('/v1', v1Router);
 app.listen(port, () => {
