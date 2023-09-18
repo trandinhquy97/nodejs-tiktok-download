@@ -35,34 +35,26 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.facebook = void 0;
+exports.instagram = void 0;
 const axios_1 = __importDefault(require("axios"));
 const form_data_1 = __importDefault(require("form-data"));
 const Cheerio = __importStar(require("cheerio"));
-function facebook(req, res, next) {
+function instagram(req, res, next) {
     return __awaiter(this, void 0, void 0, function* () {
-        const domain = "https://fdownload.app/api/ajaxSearch";
+        const domain = "https://fastdl.app/c/";
         const data = new form_data_1.default();
-        data.append('q', req.query.url);
+        data.append('url', req.query.url);
+        data.append('lang_code', 'vi');
         try {
             const resp = yield axios_1.default.post(domain, data, {
-                headers: {
-                    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36 Edg/107.0.1418.52',
-                    'Content-Type': 'multipart/form-data',
-                },
+                headers: Object.assign({ 'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.99 Safari/537.36' }, data.getHeaders()),
             });
-            const $ = Cheerio.load(resp.data.data);
-            const thumbs = $('video')
+            const $ = Cheerio.load(resp.data);
+            const thumbs = [];
+            const urls = $('a#download-btn')
                 .map((_, e) => {
                 return {
-                    url: $(e).attr('poster').replace('&amp;', '&'),
-                };
-            })
-                .toArray();
-            const urls = $('.download-link-fb')
-                .map((_, e) => {
-                return {
-                    type: $(e).attr('title').replace('Download ', ''),
+                    type: '',
                     url: $(e).attr('href').replace('&amp;', '&')
                 };
             })
@@ -74,5 +66,5 @@ function facebook(req, res, next) {
         }
     });
 }
-exports.facebook = facebook;
-//# sourceMappingURL=facebook.js.map
+exports.instagram = instagram;
+//# sourceMappingURL=instagram.js.map

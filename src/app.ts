@@ -3,6 +3,7 @@ import express from 'express';
 import { tiktok } from './controllers/tiktok';
 import { instaReels } from './controllers/insta_reels';
 import { facebook } from './controllers/facebook';
+import { instagram } from './controllers/instagram';
 
 const app = express();
 const port = 3000;
@@ -17,7 +18,7 @@ app.get('/get', tiktok);
 const v1Router = express.Router();
 
 v1Router.get('/tiktok', tiktok);
-v1Router.get('/instagram', instaReels);
+v1Router.get('/instagram', instagram);
 v1Router.get('/facebook', facebook);
 v1Router.get('/cookie', async (req, res, next) => { res.send(process.env.INSTAGRAM_COOKIE) });
 

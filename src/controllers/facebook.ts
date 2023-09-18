@@ -3,8 +3,8 @@ import FormData from 'form-data';
 import * as Cheerio from 'cheerio';
 
 export async function facebook(req, res, next) {
-    let domain = "https://fdownload.app/api/ajaxSearch";
-    let data = new FormData();
+    const domain = "https://fdownload.app/api/ajaxSearch";
+    const data = new FormData();
 
     data.append('q', req.query.url);
 
